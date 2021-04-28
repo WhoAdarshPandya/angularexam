@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div ng-app="myApp" ng-controller="myCtrl">
+        <h1>Employee List</h1>
+        <input
+          placeholder="name"
+          class="form-control"
+          ng-model="ifirstname"
+          type="text"
+        />
+        <br />
+        <input
+          placeholder="last name"
+          class="form-control"
+          ng-model="ilastname"
+          type="text"
+        />
+        <br />
+        <input
+          placeholder="dept"
+          class="form-control"
+          ng-model="idepartment"
+          type="text"
+        />
+        <br />
+        <input
+          placeholder="salary"
+          class="form-control"
+          ng-model="ibasicsalary"
+          type="text"
+        />
+        <br />
+        <button
+          ng-click="addToList(ifirstname,ilastname,idepartment,ibasicsalary)"
+          class="btn btn-dark"
+        >
+          add to list
+        </button>
+        <br />
+        <br />
+        <h1>Empolyee dashboard</h1>
+        <br />
+        <table class="table table-striped table-dark table-inverted">
+          <tr>
+            <td ng-click="filterByTags('firstName')">FirstName</td>
+            <td ng-click="filterByTags('lastName')">LastName</td>
+            <td ng-click="filterByTags('department')">Department</td>
+            <td ng-click="filterByTags('basicSalary')">Basic Salary</td>
+            <td>Increament</td>
+            <td>delete link</td>
+          </tr>
+          <tr ng-repeat="user in names | orderBy:orderParam">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.department}}</td>
+            <td>{{user.basicSalary}}</td>
+            <td ng-if="user.basicSalary>20000">{{user.basicSalary+5000}}</td>
+            <td ng-if="user.basicSalary<20000">{{user.basicSalary+2000}}</td>
+            <td>
+              <a
+                ng-click="removeFromList(user.firstName)"
+                class="btn btn-danger"
+              >
+                delete
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script src="angular.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
